@@ -1,4 +1,6 @@
-# Helm Resource for Concourse
+# Helm Resource for Concourse that supports AWS EKS
+
+This is a fork of linkyard/concourse-helm-resource that supports AWS EKS
 
 Deploy to [Kubernetes Helm](https://github.com/kubernetes/helm) from [Concourse](https://concourse.ci/).
 
@@ -11,7 +13,7 @@ resource_types:
 - name: helm
   type: docker-image
   source:
-    repository: linkyard/concourse-helm-resource
+    repository: jensendw/concourse-helm-resource
 ```
 
 ## Source Configuration
@@ -91,9 +93,9 @@ resources:
   type: helm
   source:
     cluster_url: https://kube-master.domain.example
+    use_aws_iam_authenticator: true
+    aws_eks_cluster_name: my-eks-cluster
     cluster_ca: _base64 encoded CA pem_
-    admin_key: _base64 encoded key pem_
-    admin_cert: _base64 encoded certificate pem_
     repos:
       - name: some_repo
         url: https://somerepo.github.io/charts
